@@ -1,8 +1,8 @@
-# Nest.js GraphQL Review API
+# Nest.js GraphQL API
 
 ## Description
 
-A simple GraphQL API that allows users to register accounts and submit reviews on any resource by specifying a title and link — such as a book, movie, product, or article.
+A simple GraphQL API that allows users to register accounts and submit reviews on any resource by specifying a title and link - such as a book, movie, product, or article.
 
 ## Scripts
 
