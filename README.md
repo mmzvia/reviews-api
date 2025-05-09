@@ -8,15 +8,12 @@ A simple GraphQL API that allows users to register accounts and submit reviews o
 
 ```bash
 # Project setup.
-
 $ npm install
 
 # Run e2e tests.
-
 $ npm run test:e2e
 
 # Run the development server.
-
 $ npm run start:dev
 ```
 
