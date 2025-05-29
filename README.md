@@ -61,7 +61,7 @@ $ npm run start:dev
 | ---------- | -------------------------------- | --------------- |
 | id         | UUID PRIMARY KEY                 | -               |
 | username   | VARCHAR UNIQUE                   | -               |
-| email      | VARCHAR UNIQUE                   | -               |
+| username   | VARCHAR UNIQUE                   | -               |
 | password   | VARCHAR                          | Hashed password |
 | created_at | TIMESTAMP DEFAULT now() NOT NULL | -               |
 | updated_at | TIMESTAMP DEFAULT now() NOT NULL | -               |
