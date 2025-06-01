@@ -1,24 +1,24 @@
 import { Resolver, Mutation, Args } from '@nestjs/graphql';
-import { RegisterInput, LoginResponseDto } from './dto';
+import { RegisterInput, LoginResponse } from './dto';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './guards';
 import { SerializeOptions, UseGuards } from '@nestjs/common';
-import { AuthUser } from './decorators';
+import { CurrentUser } from './decorators';
 import { User } from './entities';
 
-@Resolver()
+@Resolver((of) => User)
 export class AuthResolver {
   constructor(private readonly authService: AuthService) {}
 
   @Mutation(() => User)
   @SerializeOptions({ type: User })
-  register(@Args('registerInput') registerInput: RegisterInput): Promise<User> {
-    return this.authService.register(registerInput);
+  register(@Args('registerInput') input: RegisterInput): Promise<User> {
+    return this.authService.register(input);
   }
 
-  @Mutation(() => LoginResponseDto)
+  @Mutation(() => LoginResponse)
   @UseGuards(LocalAuthGuard)
-  login(@AuthUser('id') userId: string): Promise<LoginResponseDto> {
+  login(@CurrentUser('id') userId: string): Promise<LoginResponse> {
     return this.authService.login(userId);
   }
 }

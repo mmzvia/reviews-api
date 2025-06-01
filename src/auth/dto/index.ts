@@ -1,2 +1,2 @@
 export * from './register.input';
-export * from './login-response.dto';
+export * from './login.response';

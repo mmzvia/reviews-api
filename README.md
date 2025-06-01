@@ -17,7 +17,7 @@ $ npm run test:e2e
 $ npm run start:dev
 ```
 
-## Use Cases
+## Scenarios
 
 ### Registration & Login
 
@@ -32,7 +32,7 @@ $ npm run start:dev
 - Update an existing review.
 - Delete a specific review.
 
-## Project Modules
+## Modules
 
 ### Authentication
 
@@ -48,33 +48,8 @@ $ npm run start:dev
 ### Reviews
 
 - Create a new review.
-- Get all reviews.
-- Get all reviews by a user.
+- Get reviews for a resource.
+- Get reviews by a user id.
+- Get review by id.
 - Update a review.
 - Delete a review.
-
-## Database Schema
-
-### User
-
-| Field      | Type                             | Description     |
-| ---------- | -------------------------------- | --------------- |
-| id         | UUID PRIMARY KEY                 | -               |
-| username   | VARCHAR UNIQUE                   | -               |
-| username   | VARCHAR UNIQUE                   | -               |
-| password   | VARCHAR                          | Hashed password |
-| created_at | TIMESTAMP DEFAULT now() NOT NULL | -               |
-| updated_at | TIMESTAMP DEFAULT now() NOT NULL | -               |
-
-### Review
-
-| Field      | Type                              | Description                    |
-| ---------- | --------------------------------- | ------------------------------ |
-| id         | UUID PRIMARY KEY                  | -                              |
-| user_id    | UUID REFERENCES User(id) NOT NULL | Reviewer                       |
-| title      | VARCHAR NOT NULL                  | Title of the reviewed resource |
-| link       | TEXT                              | URL to the resource            |
-| rating     | INTEGER NOT NULL                  | Rating score (1 to 10)         |
-| comment    | TEXT                              | Review text                    |
-| created_at | TIMESTAMP DEFAULT now() NOT NULL  | -                              |
-| updated_at | TIMESTAMP DEFAULT now() NOT NULL  | -                              |

@@ -1,9 +1,11 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { Expose } from 'class-transformer';
+import { Review } from 'src/reviews/entities/review.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -27,6 +29,10 @@ export class User {
   @Field()
   @Expose()
   createdAt: Date;
+
+  @OneToMany((type) => Review, (review) => review.user)
+  @Field((type) => [Review], { nullable: true })
+  reviews?: Review[];
 
   constructor(partial: Partial<User>) {
     Object.assign(this, partial);

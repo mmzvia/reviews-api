@@ -5,7 +5,7 @@ import { JwtPayload } from './types';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities';
 import { Repository } from 'typeorm';
-import { RegisterInput, LoginResponseDto } from './dto';
+import { RegisterInput, LoginResponse } from './dto';
 
 @Injectable()
 export class AuthService {
@@ -14,7 +14,8 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async register({ username, password }: RegisterInput): Promise<User> {
+  async register(input: RegisterInput): Promise<User> {
+    const { username, password } = input;
     const emailExists = await this.userRepository.exists({
       where: { username },
     });
@@ -30,7 +31,7 @@ export class AuthService {
     return savedUser;
   }
 
-  async login(userId: string): Promise<LoginResponseDto> {
+  async login(userId: string): Promise<LoginResponse> {
     const payload: JwtPayload = { sub: userId };
     const access_token = await this.jwtService.signAsync(payload);
     return { access_token };
