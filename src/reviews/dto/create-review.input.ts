@@ -1,9 +1,10 @@
 import { Field, InputType, Int } from '@nestjs/graphql';
-import { Max, Min } from 'class-validator';
+import { IsUrl, Max, MaxLength, Min } from 'class-validator';
 
 @InputType()
 export class CreateReviewInput {
   @Field()
+  @IsUrl()
   resourceUrl: string;
 
   @Field((type) => Int)
@@ -12,5 +13,6 @@ export class CreateReviewInput {
   rating: number;
 
   @Field()
+  @MaxLength(255)
   comment: string;
 }

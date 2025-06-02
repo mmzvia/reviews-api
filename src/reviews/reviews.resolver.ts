@@ -12,43 +12,47 @@ export class ReviewsResolver {
 
   @Mutation(() => Review)
   @UseGuards(JwtGuard)
-  createReview(
-    @CurrentUser() userId: string,
+  async createReview(
+    @CurrentUser('id') userId: string,
     @Args('createReviewInput') input: CreateReviewInput,
   ): Promise<Review> {
     return this.reviewsService.createReview(userId, input);
   }
 
   @Query(() => [Review])
-  getReviewsByResourceUrl(@Args('url') url: string): Promise<Review[]> {
-    return this.reviewsService.getReviewsByResourceUrl(url);
+  async reviewsForResource(
+    @Args('resourceUrl') resourceUrl: string,
+  ): Promise<Review[]> {
+    return this.reviewsService.getReviewsForResource(resourceUrl);
   }
 
   @Query(() => [Review])
-  getReviewsByUserId(@Args('id') id: string): Promise<Review[]> {
-    return this.reviewsService.getReviewsByUserId(id);
+  async reviewsCreatedByUser(
+    @Args('userId') userId: string,
+  ): Promise<Review[]> {
+    return this.reviewsService.getReviewsCreatedByUser(userId);
   }
 
   @Query(() => Review)
-  getReviewById(@Args('id') id: string): Promise<Review> {
-    return this.reviewsService.getReviewById(id);
+  async reviewById(@Args('reviewId') reviewId: string): Promise<Review> {
+    return this.reviewsService.getReviewById(reviewId);
   }
 
   @Mutation(() => Review)
   @UseGuards(JwtGuard)
-  updateReviewById(
+  async updateReview(
     @CurrentUser('id') userId: string,
     @Args('input') input: UpdateReviewInput,
   ): Promise<Review> {
-    return this.reviewsService.updateReviewById(userId, input);
+    return this.reviewsService.updateReview(userId, input);
   }
 
   @Mutation(() => Review)
   @UseGuards(JwtGuard)
-  deleteReviewById(
+  async deleteReview(
     @CurrentUser('id') userId: string,
     @Args('id') reviewId: string,
   ): Promise<Review> {
-    return this.reviewsService.deleteReviewById(userId, reviewId);
+    return this.reviewsService.deleteReview(userId, reviewId);
   }
 }

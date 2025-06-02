@@ -1,5 +1,5 @@
 import { Resolver, Mutation, Args } from '@nestjs/graphql';
-import { RegisterInput, LoginResponse } from './dto';
+import { RegisterInput, LoginResponse, LoginInput } from './dto';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './guards';
 import { SerializeOptions, UseGuards } from '@nestjs/common';
@@ -18,7 +18,10 @@ export class AuthResolver {
 
   @Mutation(() => LoginResponse)
   @UseGuards(LocalAuthGuard)
-  login(@CurrentUser('id') userId: string): Promise<LoginResponse> {
+  login(
+    @Args('loginInput') _: LoginInput,
+    @CurrentUser('id') userId: string,
+  ): Promise<LoginResponse> {
     return this.authService.login(userId);
   }
 }

@@ -1,0 +1,66 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Review {
+  id: ID!
+  resourceUrl: String!
+  rating: Int!
+  comment: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user: User!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type User {
+  id: ID!
+  username: String!
+  createdAt: DateTime!
+  reviews: [Review!]
+}
+
+type LoginResponse {
+  access_token: String!
+}
+
+type Query {
+  reviewsForResource(resourceUrl: String!): [Review!]!
+  reviewsCreatedByUser(userId: String!): [Review!]!
+  reviewById(reviewId: String!): Review!
+}
+
+type Mutation {
+  register(registerInput: RegisterInput!): User!
+  login(loginInput: LoginInput!): LoginResponse!
+  createReview(createReviewInput: CreateReviewInput!): Review!
+  updateReview(input: UpdateReviewInput!): Review!
+  deleteReview(id: String!): Review!
+}
+
+input RegisterInput {
+  username: String!
+  password: String!
+}
+
+input LoginInput {
+  username: String!
+  password: String!
+}
+
+input CreateReviewInput {
+  resourceUrl: String!
+  rating: Int!
+  comment: String!
+}
+
+input UpdateReviewInput {
+  reviewId: ID!
+  resourceUrl: String
+  rating: Int
+  comment: String
+}

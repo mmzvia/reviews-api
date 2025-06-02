@@ -3,7 +3,6 @@ import { AuthService } from './auth.service';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './strategies';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { LocalStrategy } from './strategies/local.strategy';
 import { AuthResolver } from './auth.resolver';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities';
@@ -22,7 +21,6 @@ import { User } from './entities';
       }),
     }),
   ],
-  controllers: [AuthResolver],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
+  providers: [AuthResolver, AuthService, JwtStrategy],
 })
 export class AuthModule {}

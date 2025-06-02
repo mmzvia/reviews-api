@@ -49,7 +49,7 @@ $ npm run start:dev
 
 - Create a new review.
 - Get reviews for a resource.
-- Get reviews by a user id.
-- Get review by id.
+- Get reviews by a user ID.
+- Get review by ID.
 - Update a review.
 - Delete a review.
