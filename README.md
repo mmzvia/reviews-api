@@ -40,12 +40,6 @@ $ npm run start:dev
 - User registration.
 - User login.
 
-### Users
-
-- Get user profile.
-- Update user profile.
-- Delete user account.
-
 ### Reviews
 
 - Create a new review.
