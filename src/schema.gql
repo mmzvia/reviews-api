@@ -3,10 +3,10 @@
 # ------------------------------------------------------
 
 type Review {
-  id: ID!
+  id: ID
   resourceUrl: String!
   rating: Int!
-  comment: String!
+  content: String!
   createdAt: DateTime!
   updatedAt: DateTime!
   user: User!
@@ -38,8 +38,8 @@ type Mutation {
   register(registerInput: RegisterInput!): User!
   login(loginInput: LoginInput!): LoginResponse!
   createReview(createReviewInput: CreateReviewInput!): Review!
-  updateReview(input: UpdateReviewInput!): Review!
-  deleteReview(id: String!): Review!
+  updateReview(updateReviewInput: UpdateReviewInput!): Review!
+  deleteReview(reviewId: String!): Review!
 }
 
 input RegisterInput {
@@ -55,12 +55,12 @@ input LoginInput {
 input CreateReviewInput {
   resourceUrl: String!
   rating: Int!
-  comment: String!
+  content: String!
 }
 
 input UpdateReviewInput {
   reviewId: ID!
   resourceUrl: String
   rating: Int
-  comment: String
+  content: String
 }

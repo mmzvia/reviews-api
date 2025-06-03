@@ -14,8 +14,8 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async register(input: RegisterInput): Promise<User> {
-    const { username, password } = input;
+  async register(registerInput: RegisterInput): Promise<User> {
+    const { username, password } = registerInput;
     const emailExists = await this.userRepository.exists({
       where: { username },
     });

@@ -14,7 +14,7 @@ import {
 @ObjectType()
 export class Review {
   @PrimaryGeneratedColumn('uuid')
-  @Field((type) => ID)
+  @Field((type) => ID, { nullable: true })
   @Expose()
   id: string;
 
@@ -31,7 +31,7 @@ export class Review {
   @Column()
   @Field()
   @Expose()
-  comment: string;
+  content: string;
 
   @CreateDateColumn()
   @Field()
@@ -45,6 +45,7 @@ export class Review {
 
   @ManyToOne((type) => User, (user) => user.id)
   @Field(() => User)
+  @Expose()
   user: User;
 
   constructor(partial: Partial<Review>) {

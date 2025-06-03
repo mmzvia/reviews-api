@@ -20,17 +20,18 @@ export class ReviewsService {
 
   async createReview(
     userId: string,
-    input: CreateReviewInput,
+    createReviewInput: CreateReviewInput,
   ): Promise<Review> {
     const user = await this.usersRepository.findOneBy({ id: userId });
     if (!user) {
       throw new NotFoundException('User not found');
     }
-    const newReview = this.reviewsRepository.create({
-      ...input,
+    const reviewToCreate = this.reviewsRepository.create({
+      ...createReviewInput,
       user,
     });
-    return await this.reviewsRepository.save(newReview);
+    const createdReview = await this.reviewsRepository.save(reviewToCreate);
+    return createdReview;
   }
 
   async getReviewsForResource(resourceUrl: string): Promise<Review[]> {
@@ -66,9 +67,9 @@ export class ReviewsService {
 
   async updateReview(
     userId: string,
-    input: UpdateReviewInput,
+    updateReviewInput: UpdateReviewInput,
   ): Promise<Review> {
-    const { reviewId } = input;
+    const { reviewId } = updateReviewInput;
     const reviewToUpdate = await this.reviewsRepository.findOne({
       where: { id: reviewId },
       relations: ['user'],
@@ -81,7 +82,7 @@ export class ReviewsService {
     }
     const updatedReview = await this.reviewsRepository.save({
       id: reviewId,
-      ...input,
+      ...updateReviewInput,
     });
     return updatedReview;
   }

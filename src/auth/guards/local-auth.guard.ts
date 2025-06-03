@@ -4,10 +4,9 @@ import { AuthGuard } from '@nestjs/passport';
 
 export class LocalAuthGuard extends AuthGuard('local') {
   getRequest(context: ExecutionContext) {
-    const ctx = GqlExecutionContext.create(context);
-    const gqlCtx = ctx.getContext();
-    const args = ctx.getArgs();
-    gqlCtx.body = args.loginInput;
-    return gqlCtx;
+    const gqlContext = GqlExecutionContext.create(context);
+    const contextObject = gqlContext.getContext();
+    contextObject.body = gqlContext.getArgs().loginInput;
+    return contextObject;
   }
 }

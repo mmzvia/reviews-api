@@ -2,11 +2,12 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { ReviewsService } from './reviews.service';
 import { Review } from './entities';
 import { JwtGuard } from 'src/auth/guards';
-import { UseGuards } from '@nestjs/common';
+import { SerializeOptions, UseGuards } from '@nestjs/common';
 import { CreateReviewInput, UpdateReviewInput } from './dto';
 import { CurrentUser } from 'src/auth/decorators';
 
 @Resolver((of) => Review)
+@SerializeOptions({ type: Review })
 export class ReviewsResolver {
   constructor(private readonly reviewsService: ReviewsService) {}
 
@@ -14,9 +15,9 @@ export class ReviewsResolver {
   @UseGuards(JwtGuard)
   async createReview(
     @CurrentUser('id') userId: string,
-    @Args('createReviewInput') input: CreateReviewInput,
+    @Args('createReviewInput') createReviewInput: CreateReviewInput,
   ): Promise<Review> {
-    return this.reviewsService.createReview(userId, input);
+    return this.reviewsService.createReview(userId, createReviewInput);
   }
 
   @Query(() => [Review])
@@ -42,16 +43,16 @@ export class ReviewsResolver {
   @UseGuards(JwtGuard)
   async updateReview(
     @CurrentUser('id') userId: string,
-    @Args('input') input: UpdateReviewInput,
+    @Args('updateReviewInput') updateReviewInput: UpdateReviewInput,
   ): Promise<Review> {
-    return this.reviewsService.updateReview(userId, input);
+    return this.reviewsService.updateReview(userId, updateReviewInput);
   }
 
   @Mutation(() => Review)
   @UseGuards(JwtGuard)
   async deleteReview(
     @CurrentUser('id') userId: string,
-    @Args('id') reviewId: string,
+    @Args('reviewId') reviewId: string,
   ): Promise<Review> {
     return this.reviewsService.deleteReview(userId, reviewId);
   }

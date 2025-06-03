@@ -12,8 +12,8 @@ export class AuthResolver {
 
   @Mutation(() => User)
   @SerializeOptions({ type: User })
-  register(@Args('registerInput') input: RegisterInput): Promise<User> {
-    return this.authService.register(input);
+  register(@Args('registerInput') registerInput: RegisterInput): Promise<User> {
+    return this.authService.register(registerInput);
   }
 
   @Mutation(() => LoginResponse)

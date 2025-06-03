@@ -14,5 +14,5 @@ export class CreateReviewInput {
 
   @Field()
   @MaxLength(255)
-  comment: string;
+  content: string;
 }
