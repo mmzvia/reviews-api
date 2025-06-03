@@ -16,19 +16,18 @@ export class AuthService {
 
   async register(registerInput: RegisterInput): Promise<User> {
     const { username, password } = registerInput;
-    const emailExists = await this.userRepository.exists({
+    const emailAlredyInUse = await this.userRepository.exists({
       where: { username },
     });
-    if (emailExists) {
+    if (emailAlredyInUse) {
       throw new ForbiddenException('Email already in use');
     }
     const hash = await argon.hash(password);
-    const user = this.userRepository.create({
+    const newUser = await this.userRepository.save({
       username,
       password: hash,
     });
-    const savedUser = await this.userRepository.save(user);
-    return savedUser;
+    return newUser;
   }
 
   async login(userId: string): Promise<LoginResponse> {

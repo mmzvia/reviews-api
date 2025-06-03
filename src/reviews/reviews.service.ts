@@ -26,12 +26,11 @@ export class ReviewsService {
     if (!user) {
       throw new NotFoundException('User not found');
     }
-    const reviewToCreate = this.reviewsRepository.create({
+    const newReview = await this.reviewsRepository.save({
       ...createReviewInput,
       user,
     });
-    const createdReview = await this.reviewsRepository.save(reviewToCreate);
-    return createdReview;
+    return newReview;
   }
 
   async getReviewsForResource(resourceUrl: string): Promise<Review[]> {
@@ -69,7 +68,7 @@ export class ReviewsService {
     userId: string,
     updateReviewInput: UpdateReviewInput,
   ): Promise<Review> {
-    const { reviewId } = updateReviewInput;
+    const { reviewId, ...updateData } = updateReviewInput;
     const reviewToUpdate = await this.reviewsRepository.findOne({
       where: { id: reviewId },
       relations: ['user'],
@@ -78,11 +77,13 @@ export class ReviewsService {
       throw new NotFoundException(`No review found with ID: ${reviewId}`);
     }
     if (userId !== reviewToUpdate.user.id) {
-      throw new ForbiddenException(`No permission to update this review`);
+      throw new ForbiddenException(
+        `No permission to update review with ID: ${reviewId}`,
+      );
     }
     const updatedReview = await this.reviewsRepository.save({
       id: reviewId,
-      ...updateReviewInput,
+      ...updateData,
     });
     return updatedReview;
   }
@@ -98,7 +99,7 @@ export class ReviewsService {
     if (userId !== reviewToDelete.user.id) {
       throw new ForbiddenException(`No permission to delete this review`);
     }
-    const deletedReview = await this.reviewsRepository.remove(reviewToDelete);
-    return deletedReview;
+    await this.reviewsRepository.remove(reviewToDelete);
+    return reviewToDelete;
   }
 }
