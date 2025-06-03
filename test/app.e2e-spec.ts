@@ -43,7 +43,7 @@ describe('Nest.js GraphQL API (e2e)', () => {
     await app.close();
   });
 
-  it('mutation register', async () => {
+  it('should register a user', async () => {
     const res = await request(httpServer)
       .post('/graphql')
       .send({
@@ -67,7 +67,7 @@ describe('Nest.js GraphQL API (e2e)', () => {
     userId = id;
   });
 
-  it('mutation login', async () => {
+  it('should login a user', async () => {
     const res = await request(httpServer)
       .post('/graphql')
       .send({
@@ -86,7 +86,7 @@ describe('Nest.js GraphQL API (e2e)', () => {
     jwtToken = access_token;
   });
 
-  it('mutation createReview', async () => {
+  it('should create a review', async () => {
     const res = await request(httpServer)
       .post('/graphql')
       .set('Authorization', `Bearer ${jwtToken}`)
@@ -122,7 +122,7 @@ describe('Nest.js GraphQL API (e2e)', () => {
     reviewId = id;
   });
 
-  it('query reviewsForResource', async () => {
+  it('should return reviews for a specified resource', async () => {
     const res = await request(httpServer)
       .post('/graphql')
       .send({
@@ -137,7 +137,7 @@ describe('Nest.js GraphQL API (e2e)', () => {
     expect(res.body.data.reviewsForResource.length).toBeGreaterThan(0);
   });
 
-  it('should return reviews created by a user', async () => {
+  it('should return reviews created by a specified user', async () => {
     const res = await request(httpServer)
       .post('/graphql')
       .send({
