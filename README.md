@@ -27,8 +27,9 @@ $ npm run start:dev
 ### Create & Manage Reviews
 
 - Create a new review by providing a title, link, rating, and comment.
-- Retrieve all reviews.
-- Retrieve all reviews by a specific user.
+- Retrieve reviews for a specified resource.
+- Retrieve reviews created by a specific user.
+- Get a review by ID.
 - Update an existing review.
 - Delete a specific review.
 
