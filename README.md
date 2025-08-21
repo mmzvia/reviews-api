@@ -1,50 +1,46 @@
-# Nest.js GraphQL API
+# Reviews API
 
-## Description
+A simple **GraphQL API** that allows users to **register accounts** and **submit reviews** for any resource, such as books, movies, products, or articles.  
 
-A simple GraphQL API that allows users to register accounts and submit reviews on any resource by specifying a title and link - such as a book, movie, product, or article.
+⚠️ **Disclaimer**: This project is intended as a **learning/demo application** and is **not production-ready**. For production use, significant refactoring, optimization, and security hardening would be required.
 
-## Scripts
+## Features
 
-```bash
-# Project setup.
-$ npm install
+### 🔐 Authentication
+- User registration  
+- User login  
 
-# Run e2e tests.
-$ npm run test:e2e
+### 📝 Reviews
+- Create a new review (title, link, rating, comment)  
+- Retrieve reviews for a specific resource  
+- Retrieve reviews created by a specific user  
+- Get a review by ID  
+- Update a review  
+- Delete a review  
 
-# Run the development server.
-$ npm run start:dev
-```
-
-## Scenarios
+## Example Scenarios
 
 ### Registration & Login
-
-- Register a new user account.
-- Log in to an existing user account.
+- Register a new user account  
+- Log in to an existing user account  
 
 ### Create & Manage Reviews
+- Create a new review  
+- Retrieve reviews for a specified resource  
+- Retrieve reviews by a specific user  
+- Get a review by ID  
+- Update an existing review  
+- Delete a review  
 
-- Create a new review by providing a title, link, rating, and comment.
-- Retrieve reviews for a specified resource.
-- Retrieve reviews created by a specific user.
-- Get a review by ID.
-- Update an existing review.
-- Delete a specific review.
+## Getting Started
 
-## Modules
+```bash
+# Install dependencies
+npm install
 
-### Authentication
+# Run end-to-end tests
+$ npm run test:e2e
 
-- User registration.
-- User login.
-
-### Reviews
-
-- Create a new review.
-- Get reviews for a resource.
-- Get reviews by a user ID.
-- Get review by ID.
-- Update a review.
-- Delete a review.
+# Run the development server
+$ npm run start
+```
