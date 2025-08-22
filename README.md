@@ -6,7 +6,7 @@ A simple **GraphQL API** that allows users to **register accounts** and **submit
 
 ## Features
 
-### 🔐 Authentication
+### 🔐 Auth
 - User registration  
 - User login  
 
